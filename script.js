@@ -24,7 +24,7 @@ links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
   links.classList.remove('open');
   toggle.setAttribute('aria-expanded', false);
   toggle.textContent = '☰';
-}));
+})); 
 
 const attractionButtons = document.querySelectorAll('.dropdown-link');
 const attractionPanels = document.querySelectorAll('.panel');
