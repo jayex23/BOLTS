@@ -1542,6 +1542,11 @@ footer#contact {
   color: transparent;
   text-shadow: none;
 }
+#contact h2,
+#contact > .container > p {
+  margin-left: auto;
+  margin-right: auto;
+}
 #services > .container > .attractions-intro {
   max-width: 62ch;
   margin: 0 0 2.25rem;
