@@ -408,6 +408,37 @@ section p {
   max-width: 1000px;
   margin: 28px auto 0;
 }
+.promotion-video-card {
+  max-width: 1000px;
+  margin: 28px auto 0;
+  padding: clamp(16px, 3vw, 28px);
+  border: 1px solid rgba(250, 204, 21, 0.18);
+  border-radius: 22px;
+  background: linear-gradient(
+    145deg,
+    rgba(28, 27, 19, 0.82),
+    rgba(12, 12, 10, 0.9)
+  );
+  box-shadow:
+    0 22px 55px rgba(0, 0, 0, 0.23),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+.promotion-video-card h3 {
+  margin: 0 0 16px;
+  color: #fffdf2;
+  font:
+    700 clamp(1.2rem, 2.5vw, 1.7rem)/1.2 "Sora",
+    sans-serif;
+  letter-spacing: 0.08em;
+}
+.promotion-video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1778 / 534;
+  border: 1px solid rgba(250, 204, 21, 0.22);
+  border-radius: 16px;
+  background: #070a12;
+}
 .promotion-carousel .restaurant-slide img {
   height: clamp(280px, 48vw, 520px);
   object-fit: contain;
@@ -1390,11 +1421,21 @@ footer#contact {
 .store-highlights-video {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 1778 / 534;
   border: 1px solid rgba(250, 204, 21, 0.22);
   border-radius: 16px;
   background: #070a12;
-  object-fit: cover;
+}
+.store-highlights-video:fullscreen,
+.store-highlights-video:-webkit-full-screen {
+  width: 100vw;
+  height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
+  border: 0;
+  border-radius: 0;
+  background: #000;
+  object-fit: contain;
 }
 @media (max-width: 600px) {
   .welcome-section {
