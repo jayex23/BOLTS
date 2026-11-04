@@ -1550,7 +1550,7 @@ footer#contact {
   color: #00d4f0;
 }
 .audience-stat-magenta strong {
-  color: #e600b8;
+  color: #fff;
 }
 .audience-groups {
   display: grid;
@@ -1629,10 +1629,10 @@ footer#contact {
 #promotion > .container > p,
 #contact > .container > p {
   width: fit-content;
-  background: linear-gradient(100deg, #00d9f8 0%, #72a8ec 48%, #f501c0 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  color: #fff;
   text-shadow: none;
 }
 #contact > .container > p {
@@ -1640,6 +1640,15 @@ footer#contact {
   margin-right: auto;
 }
 #contact > .container > .copyright {
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  color: #fff;
+}
+#services h2,
+#restaurant h2,
+#promotion h2,
+#location h2 {
   background: none;
   -webkit-background-clip: border-box;
   background-clip: border-box;
@@ -1712,10 +1721,10 @@ footer#contact {
 }
 #restaurant h2 {
   width: fit-content;
-  background: linear-gradient(100deg, #00d9f8 0%, #72a8ec 48%, #f501c0 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  color: #fff;
   text-shadow: none;
 }
 #restaurant .card {
