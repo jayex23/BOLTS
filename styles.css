@@ -1353,6 +1353,49 @@ footer#contact {
   font-size: clamp(1rem, 1.5vw, 1.15rem);
   line-height: 1.85;
 }
+.store-highlights {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.6fr);
+  align-items: center;
+  gap: clamp(24px, 5vw, 64px);
+  margin-top: clamp(2.5rem, 6vw, 4.5rem);
+  padding: clamp(20px, 4vw, 38px);
+  border: 1px solid rgba(250, 204, 21, 0.2);
+  border-radius: 24px;
+  background: linear-gradient(
+    145deg,
+    rgba(13, 14, 12, 0.9),
+    rgba(22, 19, 8, 0.86)
+  );
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(14px);
+}
+.store-highlights-copy .welcome-eyebrow {
+  margin: 0 0 0.65rem;
+}
+.store-highlights-copy h3 {
+  margin: 0 0 0.75rem;
+  color: #fffdf2;
+  font:
+    800 clamp(1.7rem, 3.5vw, 2.6rem)/1.1 "Sora",
+    sans-serif;
+}
+.store-highlights-copy > p:last-child {
+  margin: 0;
+  color: #c8c4ae;
+  line-height: 1.7;
+}
+.store-highlights-video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 1px solid rgba(250, 204, 21, 0.22);
+  border-radius: 16px;
+  background: #070a12;
+  object-fit: cover;
+}
 @media (max-width: 600px) {
   .welcome-section {
     min-height: 80vh;
@@ -1370,6 +1413,9 @@ footer#contact {
   .welcome-pill {
     padding: 0.7rem 1rem;
     letter-spacing: 0.12em;
+  }
+  .store-highlights {
+    grid-template-columns: 1fr;
   }
 }
 
