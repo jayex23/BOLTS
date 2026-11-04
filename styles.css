@@ -670,11 +670,12 @@ footer {
   font-size: 0.9rem;
 }
 footer#contact {
-  padding: 40px 20px 20px;
+  padding: 20px 20px 10px;
 }
 .copyright {
-  margin: 24px auto 0;
+  margin: 10px auto 0;
   font-size: 8px;
+  color: white;
 }
 
 @media (max-width: 700px) {
@@ -1017,12 +1018,18 @@ section > .container > p {
 
 footer#contact {
   border-top: 1px solid rgba(250, 204, 21, 0.2);
-  background: linear-gradient(
-    180deg,
-    rgba(16, 15, 10, 0.46),
-    rgba(5, 5, 5, 0.92)
-  );
+  background:
+    linear-gradient(
+      90deg,
+      rgba(91, 39, 3, 0.92) 0%,
+      rgba(12, 10, 9, 0.8) 44%,
+      rgba(5, 6, 11, 0.42) 100%
+    ),
+    linear-gradient(0deg, rgba(5, 6, 11, 0.4), transparent 50%);
   box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.16);
+}
+.copyright {
+  color: #fff;
 }
 .social-link {
   border-color: rgba(250, 204, 21, 0.24);
@@ -1618,7 +1625,6 @@ footer#contact {
 }
 #services h2,
 #location h2,
-#contact h2,
 #promotion h2,
 #promotion > .container > p,
 #contact > .container > p {
@@ -1629,10 +1635,15 @@ footer#contact {
   color: transparent;
   text-shadow: none;
 }
-#contact h2,
 #contact > .container > p {
   margin-left: auto;
   margin-right: auto;
+}
+#contact > .container > .copyright {
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  color: #fff;
 }
 #services > .container > .attractions-intro {
   max-width: 62ch;
