@@ -61,86 +61,32 @@ document.querySelectorAll(".arrow-btn").forEach((button) => {
   });
 });
 
-// Independent restaurant and promotion photo carousels
-document.querySelectorAll(".photo-carousel").forEach((carousel) => {
-  const slides = Array.from(carousel.querySelectorAll(".restaurant-slide"));
-  const count = carousel.querySelector(".restaurant-slide-count");
-  let currentIndex = 0;
-
-  const lightbox = document.querySelector(".restaurant-lightbox");
-  const lightboxImage = lightbox.querySelector(".lightbox-image");
-  const lightboxCaption = lightbox.querySelector(".lightbox-caption");
-  const lightboxCount = lightbox.querySelector(".lightbox-count");
-
-  function showSlide(index) {
-    currentIndex = (index + slides.length) % slides.length;
-    slides.forEach((slide, slideIndex) => {
-      slide.classList.toggle("active", slideIndex === currentIndex);
-    });
-    count.textContent = `${currentIndex + 1} / ${slides.length}`;
-
-    if (activeRestaurantCarousel === carousel) {
-      const image = slides[currentIndex].querySelector("img");
-      lightboxImage.src = image.src;
-      lightboxImage.alt = image.alt;
-      lightboxCaption.textContent =
-        slides[currentIndex].querySelector("figcaption").textContent;
-      lightboxCount.textContent = `${currentIndex + 1} / ${slides.length}`;
-    }
-  }
-
-  carousel.querySelectorAll(".restaurant-arrow").forEach((button) => {
-    button.addEventListener("click", () => {
-      const direction = button.dataset.direction === "next" ? 1 : -1;
-      showSlide(currentIndex + direction);
-    });
-  });
-
-  slides.forEach((slide, index) => {
-    const image = slide.querySelector("img");
-    image.tabIndex = 0;
-    image.setAttribute("role", "button");
-    image.setAttribute(
-      "aria-label",
-      `Open photo ${index + 1} of ${slides.length} in larger view`,
-    );
-
-    function openPhoto() {
-      currentIndex = index;
-      activeRestaurantCarousel = carousel;
-      showSlide(currentIndex);
-      lightbox.showModal();
-      lightbox.querySelector(".lightbox-close").focus();
-    }
-
-    image.addEventListener("click", openPhoto);
-    image.addEventListener("keydown", (event) => {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        openPhoto();
-      }
-    });
-  });
-});
-
 let activeRestaurantCarousel = null;
+let activeRestaurantSlideController = null;
+let activeRestaurantPauseController = null;
 const restaurantLightbox = document.querySelector(".restaurant-lightbox");
+const lightboxImage = restaurantLightbox.querySelector(".lightbox-image");
+const lightboxCaption = restaurantLightbox.querySelector(".lightbox-caption");
+const lightboxCount = restaurantLightbox.querySelector(".lightbox-count");
 const lightboxClose = restaurantLightbox.querySelector(".lightbox-close");
 
 lightboxClose.addEventListener("click", () => restaurantLightbox.close());
 restaurantLightbox.querySelectorAll(".lightbox-arrow").forEach((button) => {
   button.addEventListener("click", () => {
-    if (!activeRestaurantCarousel) return;
-    const carousel = activeRestaurantCarousel;
-    const direction = button.classList.contains("lightbox-next")
-      ? "next"
-      : "prev";
-    carousel
-      .querySelector(`.restaurant-arrow[data-direction="${direction}"]`)
-      .click();
+    if (!activeRestaurantSlideController) return;
+    const direction = button.classList.contains("lightbox-next") ? 1 : -1;
+    activeRestaurantSlideController(direction);
   });
 });
 
+restaurantLightbox.addEventListener("close", () => {
+  if (activeRestaurantPauseController) {
+    activeRestaurantPauseController(false);
+  }
+  activeRestaurantCarousel = null;
+  activeRestaurantSlideController = null;
+  activeRestaurantPauseController = null;
+});
 restaurantLightbox.addEventListener("click", (event) => {
   if (event.target === restaurantLightbox) restaurantLightbox.close();
 });
@@ -156,26 +102,223 @@ restaurantLightbox.querySelector(".lightbox-figure").addEventListener(
 restaurantLightbox.querySelector(".lightbox-figure").addEventListener(
   "touchend",
   (event) => {
-    if (swipeStartX === null || !activeRestaurantCarousel) return;
+    if (swipeStartX === null || !activeRestaurantSlideController) return;
     const swipeDistance = event.changedTouches[0].clientX - swipeStartX;
     swipeStartX = null;
     if (Math.abs(swipeDistance) < 45) return;
-    const direction = swipeDistance < 0 ? "next" : "prev";
-    activeRestaurantCarousel
-      .querySelector(`.restaurant-arrow[data-direction="${direction}"]`)
-      .click();
+    activeRestaurantSlideController(swipeDistance < 0 ? 1 : -1);
   },
   { passive: true },
 );
 
 document.addEventListener("keydown", (event) => {
-  if (!restaurantLightbox.open || !activeRestaurantCarousel) return;
+  if (!restaurantLightbox.open || !activeRestaurantSlideController) return;
   if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
   event.preventDefault();
-  const direction = event.key === "ArrowRight" ? "next" : "prev";
-  activeRestaurantCarousel
-    .querySelector(`.restaurant-arrow[data-direction="${direction}"]`)
-    .click();
+  activeRestaurantSlideController(event.key === "ArrowRight" ? 1 : -1);
+});
+
+document.querySelectorAll(".feature-carousel").forEach((carousel) => {
+  const isRestaurantCarousel = carousel.classList.contains(
+    "feature-carousel--restaurant",
+  );
+  const slidesElement = carousel.querySelector(".feature-carousel-slides");
+  const slides = Array.from(slidesElement.children);
+  const thumbnailsElement = carousel.querySelector(
+    ".feature-carousel-thumbnails",
+  );
+  const currentElement = carousel.querySelector(".feature-carousel-current");
+  const totalElement = carousel.querySelector(".feature-carousel-total");
+  const progressBar = carousel.querySelector(".feature-carousel-progress-bar");
+  const lightboxArrows = restaurantLightbox.querySelectorAll(".lightbox-arrow");
+  const duration = 5000;
+  let currentIndex = 0;
+  let timer = null;
+  let paused = false;
+  let touchStartX = null;
+
+  totalElement.textContent = String(slides.length).padStart(2, "0");
+  thumbnailsElement.style.setProperty(
+    "--feature-slide-count",
+    slides.length,
+  );
+
+  const thumbnails = slides.map((slide, index) => {
+    const image = slide.querySelector("img");
+    const title = slide.querySelector(".feature-carousel-title");
+    const button = document.createElement("button");
+    const thumbnailImage = document.createElement("img");
+
+    button.className = "feature-carousel-thumbnail";
+    button.type = "button";
+    button.setAttribute(
+      "aria-label",
+      `Show ${title.textContent.trim()}`,
+    );
+    button.setAttribute("aria-pressed", "false");
+    thumbnailImage.src = image.getAttribute("src");
+    thumbnailImage.alt = "";
+    thumbnailImage.loading = "lazy";
+    button.append(thumbnailImage);
+    button.addEventListener("click", () => showSlide(index));
+    thumbnailsElement.append(button);
+    return button;
+  });
+
+  function updateLightbox() {
+    if (activeRestaurantCarousel !== carousel) return;
+    const slide = slides[currentIndex];
+    const image = slide.querySelector("img");
+    lightboxImage.src = image.currentSrc || image.src;
+    lightboxImage.alt = image.alt;
+    lightboxCaption.textContent = slide
+      .querySelector(".feature-carousel-title")
+      .textContent.trim();
+    lightboxCount.textContent = `${currentIndex + 1} / ${slides.length}`;
+  }
+
+  function restartProgress() {
+    window.clearTimeout(timer);
+    progressBar.classList.remove("running", "paused");
+    void progressBar.offsetWidth;
+    progressBar.style.setProperty(
+      "--feature-carousel-duration",
+      `${duration}ms`,
+    );
+    progressBar.classList.add("running");
+    if (paused) {
+      progressBar.classList.add("paused");
+    } else {
+      timer = window.setTimeout(
+        () => showSlide(currentIndex + 1),
+        duration,
+      );
+    }
+  }
+
+  function showSlide(index) {
+    currentIndex = (index + slides.length) % slides.length;
+    slidesElement.style.transform = `translateX(-${currentIndex * 100}%)`;
+    slides.forEach((slide, slideIndex) => {
+      slide.setAttribute(
+        "aria-label",
+        `${slideIndex + 1} of ${slides.length}`,
+      );
+      slide.setAttribute(
+        "aria-hidden",
+        slideIndex === currentIndex ? "false" : "true",
+      );
+      if (isRestaurantCarousel) {
+        const image = slide.querySelector("img");
+        image.tabIndex = slideIndex === currentIndex ? 0 : -1;
+        if (slideIndex === currentIndex) image.loading = "eager";
+      }
+    });
+    thumbnails.forEach((thumbnail, thumbnailIndex) => {
+      thumbnail.classList.toggle("active", thumbnailIndex === currentIndex);
+      thumbnail.setAttribute(
+        "aria-pressed",
+        thumbnailIndex === currentIndex ? "true" : "false",
+      );
+    });
+    currentElement.textContent = String(currentIndex + 1).padStart(2, "0");
+    restartProgress();
+    updateLightbox();
+  }
+
+  function setPaused(shouldPause) {
+    if (paused === shouldPause) return;
+    paused = shouldPause;
+    if (paused) {
+      window.clearTimeout(timer);
+      progressBar.classList.add("paused");
+    } else {
+      restartProgress();
+    }
+  }
+
+  if (isRestaurantCarousel) {
+    slides.forEach((slide, index) => {
+      const image = slide.querySelector("img");
+      image.setAttribute("role", "button");
+      image.setAttribute(
+        "aria-label",
+        `Open photo ${index + 1} of ${slides.length} in larger view`,
+      );
+
+      function openPhoto() {
+        activeRestaurantCarousel = carousel;
+        activeRestaurantSlideController = (direction) =>
+          showSlide(currentIndex + direction);
+        activeRestaurantPauseController = setPaused;
+        lightboxArrows.forEach((button) => {
+          button.hidden = slides.length < 2;
+        });
+        showSlide(index);
+        restaurantLightbox.showModal();
+        lightboxClose.focus();
+      }
+
+      image.addEventListener("click", openPhoto);
+      image.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openPhoto();
+        }
+      });
+    });
+  }
+
+  carousel.addEventListener("mouseenter", () => setPaused(true));
+  carousel.addEventListener("mouseleave", () => {
+    setPaused(carousel.contains(document.activeElement));
+  });
+  carousel.addEventListener("focusin", () => setPaused(true));
+  carousel.addEventListener("focusout", (event) => {
+    if (
+      !carousel.contains(event.relatedTarget) &&
+      !carousel.matches(":hover") &&
+      !(restaurantLightbox.open && activeRestaurantCarousel === carousel)
+    ) {
+      setPaused(false);
+    }
+  });
+  carousel.addEventListener("keydown", (event) => {
+    if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+    event.preventDefault();
+    showSlide(currentIndex + (event.key === "ArrowRight" ? 1 : -1));
+  });
+
+  const stage = carousel.querySelector(".feature-carousel-stage");
+  stage.addEventListener(
+    "touchstart",
+    (event) => {
+      touchStartX = event.changedTouches[0].screenX;
+    },
+    { passive: true },
+  );
+  stage.addEventListener(
+    "touchend",
+    (event) => {
+      if (touchStartX === null) return;
+      const distance = event.changedTouches[0].screenX - touchStartX;
+      touchStartX = null;
+      if (Math.abs(distance) > 50) {
+        showSlide(currentIndex + (distance < 0 ? 1 : -1));
+      }
+    },
+    { passive: true },
+  );
+
+  document.addEventListener("visibilitychange", () => {
+    setPaused(
+      document.hidden ||
+        carousel.matches(":hover") ||
+        carousel.contains(document.activeElement),
+    );
+  });
+
+  showSlide(0);
 });
 
 // Highlight the link of the section you are viewing

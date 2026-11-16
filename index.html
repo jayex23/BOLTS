@@ -93,7 +93,6 @@
 
           <li><a href="#restaurant">Restaurant</a></li>
           <li><a href="#promotion">Promotion</a></li>
-          <li><a href="#about">About</a></li>
           <li><a href="#location">Location</a></li>
           <li><a href="#contact">Contact</a></li>
           <li><a href="https://awsaudi.com/">Adventure World</a></li>
@@ -105,7 +104,16 @@
     <main>
       <section class="hero hero-cover" id="home">
         <div class="hero-cover-bg" aria-hidden="true">
-          <img src="photos/DSC03157.jpg" alt="" fetchpriority="high" />
+          <video
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            poster="photos/DSC03157.jpg"
+          >
+            <source src="video/vid1.mp4" type="video/mp4" />
+          </video>
         </div>
         <div class="container">
           <div class="hero-cover-copy">
@@ -400,146 +408,172 @@
       <section class="alt" id="restaurant">
         <div class="container">
           <h2>Restaurant</h2>
-          <p>
-            Take a break from the fun and enjoy great food and refreshing drinks
-            at Bolts.
-          </p>
-          <div class="grid">
-            <article class="card">
-              <h3>Drinks And Coffee</h3>
-              <p>Refresh yourself with our selection of beverages.</p>
-              <div
-                class="restaurant-carousel photo-carousel"
-                aria-label="Drink photo gallery"
-              >
-                <figure class="restaurant-slide active">
-                  <img
-                    src="photos/BOLTS Menu iPad Screen 5 (3).jpg"
-                    alt="Replace with drink photo 1"
-                    loading="lazy"
-                  />
-                  <figcaption></figcaption>
-                </figure>
-
-                <div class="restaurant-carousel-controls">
-                  <button
-                    class="restaurant-arrow"
-                    type="button"
-                    data-direction="prev"
-                    aria-label="Previous snack photo"
-                  >
-                    ←
-                  </button>
-                  <span class="restaurant-slide-count" aria-live="polite"
-                    >1 / 1</span
-                  >
-                  <button
-                    class="restaurant-arrow"
-                    type="button"
-                    data-direction="next"
-                    aria-label="Next snack photo"
-                  >
-                    →
-                  </button>
-                </div>
+          <p>Great food, refreshing drinks, and good times at BOLTS.</p>
+          <div
+            class="feature-carousel feature-carousel--restaurant"
+            tabindex="0"
+            role="region"
+            aria-roledescription="carousel"
+            aria-label="BOLTS venue photo gallery"
+          >
+            <div class="feature-carousel-topbar">
+              <div class="feature-carousel-counter" aria-live="polite">
+                <strong class="feature-carousel-current">01</strong> /
+                <span class="feature-carousel-total">10</span>
               </div>
-            </article>
-            <article class="card">
-              <h3>Meals</h3>
-              <p>Enjoy a satisfying meal with friends and family.</p>
-              <div
-                class="restaurant-carousel photo-carousel"
-                aria-label="Meal photo gallery"
-              >
-                <figure class="restaurant-slide active">
-                  <img
-                    src="photos/BOLTS Menu iPad Screen 1 (1).jpg"
-                    alt="Meal menu photo 1"
-                    loading="lazy"
-                  />
-                  <figcaption></figcaption>
-                </figure>
-                <figure class="restaurant-slide">
-                  <img
-                    src="photos/BOLTS Menu iPad Screen 2 (1).jpg"
-                    alt="Meal menu photo 2"
-                    loading="lazy"
-                  />
-                  <figcaption></figcaption>
-                </figure>
-                <figure class="restaurant-slide">
-                  <img
-                    src="photos/BOLTS Menu iPad Screen 3 (1).jpg"
-                    alt="Meal menu photo 3"
-                    loading="lazy"
-                  />
-                  <figcaption></figcaption>
-                </figure>
-
-                <div class="restaurant-carousel-controls">
-                  <button
-                    class="restaurant-arrow"
-                    type="button"
-                    data-direction="prev"
-                    aria-label="Previous meal photo"
-                  >
-                    ←
-                  </button>
-                  <span class="restaurant-slide-count" aria-live="polite"
-                    >1 / 3</span
-                  >
-                  <button
-                    class="restaurant-arrow"
-                    type="button"
-                    data-direction="next"
-                    aria-label="Next meal photo"
-                  >
-                    →
-                  </button>
-                </div>
+              <div class="feature-carousel-progress" aria-hidden="true">
+                <div class="feature-carousel-progress-bar"></div>
               </div>
-            </article>
-            <article class="card">
-              <h3>Pizzas</h3>
-              <p>
-                Choose a refreshing drink and relax before your next adventure.
-              </p>
-              <div
-                class="restaurant-carousel photo-carousel"
-                aria-label="Pizza photo gallery"
-              >
-                <figure class="restaurant-slide active">
+            </div>
+            <div class="feature-carousel-stage">
+              <div class="feature-carousel-slides">
+                <figure
+                  class="feature-carousel-slide"
+                  aria-roledescription="slide"
+                  aria-label="1 of 10"
+                >
                   <img
-                    src="photos/BOLTS Menu iPad Screen 4 (1).jpg"
-                    alt="Replace with pizza photo 1"
+                    src="photos2/dining.jpg"
+                    alt="Guests enjoying food and drinks in the BOLTS restaurant"
+                    loading="eager"
+                  />
+                  <figcaption class="feature-carousel-title">
+                    Food, friends, and good times at BOLTS.
+                  </figcaption>
+                </figure>
+                <figure
+                  class="feature-carousel-slide"
+                  aria-roledescription="slide"
+                  aria-label="2 of 10"
+                >
+                  <img
+                    src="photos/DSC03157.jpg"
+                    alt="Guests playing pool at BOLTS"
                     loading="lazy"
                   />
-                  <figcaption></figcaption>
+                  <figcaption class="feature-carousel-title">
+                    Pool and games at BOLTS.
+                  </figcaption>
                 </figure>
-
-                <div class="restaurant-carousel-controls">
-                  <button
-                    class="restaurant-arrow"
-                    type="button"
-                    data-direction="prev"
-                    aria-label="Previous pizza photo"
-                  >
-                    ←
-                  </button>
-                  <span class="restaurant-slide-count" aria-live="polite"
-                    >1 / 1</span
-                  >
-                  <button
-                    class="restaurant-arrow"
-                    type="button"
-                    data-direction="next"
-                    aria-label="Next pizza photo"
-                  >
-                    →
-                  </button>
-                </div>
+                <figure
+                  class="feature-carousel-slide"
+                  aria-roledescription="slide"
+                  aria-label="3 of 10"
+                >
+                  <img
+                    src="photos/DSC03140.jpg"
+                    alt="Guests bowling at BOLTS"
+                    loading="lazy"
+                  />
+                  <figcaption class="feature-carousel-title">
+                    Bowling lanes at BOLTS.
+                  </figcaption>
+                </figure>
+                <figure
+                  class="feature-carousel-slide"
+                  aria-roledescription="slide"
+                  aria-label="4 of 10"
+                >
+                  <img
+                    src="photos2/bowlingbg.jpg"
+                    alt="BOLTS bowling lanes and neon-lit interior"
+                    loading="lazy"
+                  />
+                  <figcaption class="feature-carousel-title">
+                    Neon-lit bowling lanes.
+                  </figcaption>
+                </figure>
+                <figure
+                  class="feature-carousel-slide"
+                  aria-roledescription="slide"
+                  aria-label="5 of 10"
+                >
+                  <img
+                    src="photos2/darts.jpg"
+                    alt="Guests playing darts at BOLTS"
+                    loading="lazy"
+                  />
+                  <figcaption class="feature-carousel-title">
+                    Interactive darts at BOLTS.
+                  </figcaption>
+                </figure>
+                <figure
+                  class="feature-carousel-slide"
+                  aria-roledescription="slide"
+                  aria-label="6 of 10"
+                >
+                  <img
+                    src="photos2/archery.jpg"
+                    alt="Guests trying digital archery at BOLTS"
+                    loading="lazy"
+                  />
+                  <figcaption class="feature-carousel-title">
+                    Digital archery at BOLTS.
+                  </figcaption>
+                </figure>
+                <figure
+                  class="feature-carousel-slide"
+                  aria-roledescription="slide"
+                  aria-label="7 of 10"
+                >
+                  <img
+                    src="photos2/shooting.jpg"
+                    alt="Guest playing a digital shooting game at BOLTS"
+                    loading="lazy"
+                  />
+                  <figcaption class="feature-carousel-title">
+                    Digital shooting games at BOLTS.
+                  </figcaption>
+                </figure>
+                <figure
+                  class="feature-carousel-slide"
+                  aria-roledescription="slide"
+                  aria-label="8 of 10"
+                >
+                  <img
+                    src="photos2/music.jpg"
+                    alt="Live music performance at BOLTS"
+                    loading="lazy"
+                  />
+                  <figcaption class="feature-carousel-title">
+                    Live music at BOLTS.
+                  </figcaption>
+                </figure>
+                <figure
+                  class="feature-carousel-slide"
+                  aria-roledescription="slide"
+                  aria-label="9 of 10"
+                >
+                  <img
+                    src="photos2/f1.jpg"
+                    alt="Formula racing simulator at BOLTS"
+                    loading="lazy"
+                  />
+                  <figcaption class="feature-carousel-title">
+                    Racing simulators at BOLTS.
+                  </figcaption>
+                </figure>
+                <figure
+                  class="feature-carousel-slide"
+                  aria-roledescription="slide"
+                  aria-label="10 of 10"
+                >
+                  <img
+                    src="photos2/carnival.jpg"
+                    alt="Carnival games at BOLTS"
+                    loading="lazy"
+                  />
+                  <figcaption class="feature-carousel-title">
+                    Carnival games at BOLTS.
+                  </figcaption>
+                </figure>
               </div>
-            </article>
+            </div>
+            <div
+              class="feature-carousel-thumbnails"
+              role="group"
+              aria-label="Choose a venue photo"
+            ></div>
           </div>
         </div>
       </section>
@@ -548,149 +582,61 @@
         <div class="container">
           <h2>Promotions</h2>
           <p>Discover the latest offers and special events at Bolts.</p>
-          <div
-            class="restaurant-carousel photo-carousel promotion-carousel"
-            aria-label="Promotion photo gallery"
-          >
-            <figure class="restaurant-slide active">
-              <img
-                src="photos/offer arabic.jpg"
-                alt="Promotion photo 1 — replace with your current offer"
-                loading="lazy"
-              />
-              <figcaption></figcaption>
-            </figure>
-            <figure class="restaurant-slide">
-              <img
-                src="photos/offer english.jpg"
-                alt="Promotion photo 2 — replace with your current offer"
-                loading="lazy"
-              />
-              <figcaption></figcaption>
-            </figure>
-
-            <div class="restaurant-carousel-controls">
-              <button
-                class="restaurant-arrow"
-                type="button"
-                data-direction="prev"
-                aria-label="Previous promotion"
-              >
-                ←
-              </button>
-              <span class="restaurant-slide-count" aria-live="polite"
-                >1 / 2</span
-              >
-              <button
-                class="restaurant-arrow"
-                type="button"
-                data-direction="next"
-                aria-label="Next promotion"
-              >
-                →
-              </button>
-            </div>
-          </div>
-          <div class="promotion-video-card" aria-labelledby="pricelist-heading">
-            <h3 id="pricelist-heading">PRICELIST</h3>
-            <video
-              class="promotion-video"
-              controls
-              playsinline
-              preload="metadata"
-              aria-label="BOLTS pricelist video"
-            >
-              <source src="video/vid2.mp4" type="video/mp4" />
-              Your browser does not support HTML video.
-            </video>
-          </div>
+          <h3 class="promotion-feature-heading">Featured Offer Screens</h3>
         </div>
-      </section>
-
-      <section class="welcome-section" id="about">
-        <div class="welcome-bg" aria-hidden="true">
-          <img src="photos2/bowlingbg.jpg" alt="" loading="lazy" />
-        </div>
-        <div class="container">
-          <p class="welcome-eyebrow">AWE’S NEW FRONTIER</p>
-          <h2>WELCOME TO BOLTS</h2>
-          <span class="welcome-pill">SOCIAL ENTERTAINMENT CLUB</span>
-          <p class="welcome-lead">
-            Building on 20 years of entertainment expertise and a deep
-            understanding of the Saudi market, AWE identified a gap in the
-            premium social entertainment space. BOLTS is a bold new concept for
-            adults and young professionals where competitive socializing,
-            elevated hospitality, and cutting-edge technology converge.
-          </p>
-
+        <div
+          class="feature-carousel feature-carousel--offers"
+          tabindex="0"
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="Featured offer screens"
+        >
+          <div class="feature-carousel-topbar">
+            <div class="feature-carousel-counter" aria-live="polite">
+              <strong class="feature-carousel-current">01</strong> /
+              <span class="feature-carousel-total">02</span>
+            </div>
+            <div class="feature-carousel-progress" aria-hidden="true">
+              <div class="feature-carousel-progress-bar"></div>
+            </div>
+          </div>
+          <div class="feature-carousel-stage">
+            <div class="feature-carousel-slides">
+              <figure
+                class="feature-carousel-slide"
+                aria-roledescription="slide"
+                aria-label="1 of 2"
+              >
+                <img
+                  src="photos2/BOLTS Offer Long Screen AR.jpg"
+                  alt="BOLTS offer banner in Arabic"
+                  loading="eager"
+                />
+                <figcaption class="feature-carousel-title">
+                  Current offer — Arabic
+                </figcaption>
+              </figure>
+              <figure
+                class="feature-carousel-slide"
+                aria-roledescription="slide"
+                aria-label="2 of 2"
+              >
+                <img
+                  src="photos2/BOLTS Offer Long Screen EN.jpg"
+                  alt="BOLTS offer banner in English"
+                  loading="eager"
+                />
+                <figcaption class="feature-carousel-title">
+                  Current offer — English
+                </figcaption>
+              </figure>
+            </div>
+          </div>
           <div
-            class="store-highlights"
-            aria-labelledby="store-highlights-heading"
-          >
-            <div class="store-highlights-copy">
-              <p class="welcome-eyebrow">SEE THE EXPERIENCE</p>
-              <h3 id="store-highlights-heading">STORE HIGHLIGHTS</h3>
-              <p>Take a look inside BOLTS and see the fun in action.</p>
-            </div>
-            <video
-              class="store-highlights-video"
-              controls
-              playsinline
-              preload="metadata"
-              poster=""
-              aria-label="BOLTS store highlights"
-            >
-              <source src="video/vid1.mp4" type="video/mp4" />
-              Your browser does not support HTML video.
-            </video>
-          </div>
-
-          <div class="audience-block" aria-labelledby="audience-heading">
-            <div class="audience-heading">
-              <p class="audience-eyebrow">CAPTURING THE PREMIUM ADULT MARKET</p>
-              <h3 id="audience-heading">TARGET AUDIENCE</h3>
-              <p>
-                Young professionals and adults seeking premium, sophisticated
-                social experiences.
-              </p>
-            </div>
-            <div class="audience-stats">
-              <article class="audience-stat audience-stat-orange">
-                <strong>18–35</strong>
-                <span>CORE AGE RANGE</span>
-              </article>
-              <article class="audience-stat audience-stat-amber">
-                <strong>+45%</strong>
-                <span>REPEAT VISIT RATIO</span>
-              </article>
-              <article class="audience-stat audience-stat-cyan">
-                <strong>350–550</strong>
-                <span>VISITOR CAPACITY</span>
-              </article>
-              <article class="audience-stat audience-stat-magenta">
-                <strong>1,500–2,000</strong>
-                <span>SQM VENUE SIZE</span>
-              </article>
-            </div>
-            <div class="audience-groups">
-              <article>
-                <h4>Young professionals</h4>
-                <p>After-work socializing &amp; networking</p>
-              </article>
-              <article>
-                <h4>Couples</h4>
-                <p>Date nights &amp; special occasions</p>
-              </article>
-              <article>
-                <h4>Groups of friends</h4>
-                <p>Celebrations &amp; nights out</p>
-              </article>
-              <article>
-                <h4>Corporate clients</h4>
-                <p>Team building &amp; client entertainment</p>
-              </article>
-            </div>
-          </div>
+            class="feature-carousel-thumbnails"
+            role="group"
+            aria-label="Choose an offer"
+          ></div>
         </div>
       </section>
 
@@ -717,8 +663,13 @@
 
     <footer id="contact">
       <div class="container">
-        <div class="social-links" aria-label="Social media">
-          <a class="social-link" href="#" aria-label="Email us with Gmail">
+        <h2 class="contact-heading">Contact Us</h2>
+        <div class="social-links" aria-label="Contact information">
+          <a
+            class="social-link"
+            href="mailto:yourname@gmail.com"
+            aria-label="Sample email address:"
+          >
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path
                 fill="#4285F4"
@@ -734,70 +685,17 @@
               />
               <path fill="#FBBC04" d="M7 19v-9.9l5 3.7 5-3.7V19H7Z" />
             </svg>
+            <span class="social-copy">
+              <span class="social-label">Gmail</span>
+              <span class="social-value">sample@gmail.com</span>
+            </span>
           </a>
           <a
             class="social-link"
-            href="#"
+            href="https://wa.me/9665XXXXXXXX"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="TikTok"
-          >
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                fill="#25F4EE"
-                d="M15.2 3h3.1c.2 2.2 1.4 3.8 3.7 4.5v3.2a9.2 9.2 0 0 1-3.7-1.4v6.2a6.6 6.6 0 1 1-6.6-6.6c.4 0 .8 0 1.2.1v3.4a3.3 3.3 0 1 0 2.3 3.1V3Z"
-                transform="translate(-1.3 1)"
-              />
-              <path
-                fill="#FE2C55"
-                d="M15.2 3h3.1c.2 2.2 1.4 3.8 3.7 4.5v3.2a9.2 9.2 0 0 1-3.7-1.4v6.2a6.6 6.6 0 1 1-6.6-6.6c.4 0 .8 0 1.2.1v3.4a3.3 3.3 0 1 0 2.3 3.1V3Z"
-                transform="translate(-.5 .5)"
-              />
-              <path
-                fill="currentColor"
-                d="M15.2 3h3.1c.2 2.2 1.4 3.8 3.7 4.5v3.2a9.2 9.2 0 0 1-3.7-1.4v6.2a6.6 6.6 0 1 1-6.6-6.6c.4 0 .8 0 1.2.1v3.4a3.3 3.3 0 1 0 2.3 3.1V3Z"
-              />
-            </svg>
-          </a>
-          <a
-            class="social-link"
-            href="#"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Instagram"
-          >
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              aria-hidden="true"
-            >
-              <rect x="3" y="3" width="18" height="18" rx="5" />
-              <circle cx="12" cy="12" r="4" />
-              <circle cx="18" cy="6" r="1" fill="currentColor" stroke="none" />
-            </svg>
-          </a>
-          <a
-            class="social-link"
-            href="#"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Snapchat"
-          >
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                fill="currentColor"
-                d="M12 3.2c-2.2 0-3.7 1.7-3.7 4.1 0 .8.1 1.7.2 2.5-.6.4-1.3.4-2 .1-.4-.2-.8 0-.9.4-.1.3.1.6.4.8.8.4 1.6.5 2.4.2-.6 1.5-1.8 2.8-3.4 3.5-.4.2-.5.7-.2 1 .2.2.5.2.8.3.6.1 1 .4 1.2.8.2.3.5.4.9.3.8-.3 1.7-.2 2.5.2.6.3 1.2.8 1.8 1.3.6-.5 1.2-1 1.8-1.3.8-.4 1.7-.5 2.5-.2.4.1.7 0 .9-.3.2-.4.6-.7 1.2-.8.3-.1.6-.1.8-.3.3-.3.2-.8-.2-1-1.6-.7-2.8-2-3.4-3.5.8.3 1.6.2 2.4-.2.3-.2.5-.5.4-.8-.1-.4-.5-.6-.9-.4-.7.3-1.4.3-2-.1.1-.8.2-1.7.2-2.5 0-2.4-1.5-4.1-3.7-4.1Z"
-              />
-            </svg>
-          </a>
-          <a
-            class="social-link"
-            href="#"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="WhatsApp"
+            aria-label="WhatsApp +966 5X XXX XXXX"
           >
             <svg
               viewBox="0 0 24 24"
@@ -815,6 +713,51 @@
                 d="M8.5 8.2c.2-.5.4-.5.7-.5h.5c.2 0 .4.1.5.4l.7 1.6c.1.2.1.4-.1.6l-.5.6c-.2.2-.2.4-.1.6.6 1 1.4 1.8 2.4 2.4.2.1.4.1.6-.1l.7-.8c.2-.2.4-.2.6-.1l1.6.8c.3.1.4.3.4.5 0 .3-.2 1.2-.8 1.7-.5.5-1.2.7-2 .5-1.1-.3-2.5-.9-4-2.3-1.8-1.6-2.8-3.6-2.9-4.5-.1-.8.2-1.2.7-1.4Z"
               />
             </svg>
+            <span class="social-copy">
+              <span class="social-label">WhatsApp</span>
+              <span class="social-value">sample number</span>
+            </span>
+          </a>
+          <a
+            class="social-link"
+            href="https://www.snapchat.com/add/YOUR_SNAPCHAT"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Snapchat YOUR_SNAPCHAT"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                fill="currentColor"
+                d="M12 3.2c-2.2 0-3.7 1.7-3.7 4.1 0 .8.1 1.7.2 2.5-.6.4-1.3.4-2 .1-.4-.2-.8 0-.9.4-.1.3.1.6.4.8.8.4 1.6.5 2.4.2-.6 1.5-1.8 2.8-3.4 3.5-.4.2-.5.7-.2 1 .2.2.5.2.8.3.6.1 1 .4 1.2.8.2.3.5.4.9.3.8-.3 1.7-.2 2.5.2.6.3 1.2.8 1.8 1.3.6-.5 1.2-1 1.8-1.3.8-.4 1.7-.5 2.5-.2.4.1.7 0 .9-.3.2-.4.6-.7 1.2-.8.3-.1.6-.1.8-.3.3-.3.2-.8-.2-1-1.6-.7-2.8-2-3.4-3.5.8.3 1.6.2 2.4-.2.3-.2.5-.5.4-.8-.1-.4-.5-.6-.9-.4-.7.3-1.4.3-2-.1.1-.8.2-1.7.2-2.5 0-2.4-1.5-4.1-3.7-4.1Z"
+              />
+            </svg>
+            <span class="social-copy">
+              <span class="social-label">Snapchat</span>
+              <span class="social-value">@sample_snapchat</span>
+            </span>
+          </a>
+          <a
+            class="social-link"
+            href="https://www.instagram.com/YOUR_INSTAGRAM/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram YOUR_INSTAGRAM"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+            >
+              <rect x="3" y="3" width="18" height="18" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle cx="18" cy="6" r="1" fill="currentColor" stroke="none" />
+            </svg>
+            <span class="social-copy">
+              <span class="social-label">Instagram</span>
+              <span class="social-value">@sample_instagram</span>
+            </span>
           </a>
         </div>
         <p class="copyright">
