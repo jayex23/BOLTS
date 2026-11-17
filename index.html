@@ -582,57 +582,91 @@
         <div class="container">
           <h2>Promotions</h2>
           <p>Discover the latest offers and special events at Bolts.</p>
-          <h3 class="promotion-feature-heading">Featured Offer Screens</h3>
+          <h3 class="promotion-feature-heading"></h3>
         </div>
         <div
-          class="feature-carousel feature-carousel--offers"
+          class="promotion-deck-carousel"
           tabindex="0"
           role="region"
           aria-roledescription="carousel"
           aria-label="Featured offer screens"
         >
-          <div class="feature-carousel-topbar">
-            <div class="feature-carousel-counter" aria-live="polite">
-              <strong class="feature-carousel-current">01</strong> /
-              <span class="feature-carousel-total">02</span>
-            </div>
-            <div class="feature-carousel-progress" aria-hidden="true">
-              <div class="feature-carousel-progress-bar"></div>
-            </div>
-          </div>
-          <div class="feature-carousel-stage">
-            <div class="feature-carousel-slides">
+          <div class="promotion-deck-viewport">
+            <div class="promotion-deck-track">
               <figure
-                class="feature-carousel-slide"
+                class="promotion-deck-card"
                 aria-roledescription="slide"
-                aria-label="1 of 2"
+                aria-label="1 of 4"
               >
                 <img
                   src="photos/offer arabic.jpg"
                   alt="BOLTS offer banner in Arabic"
                   loading="eager"
                 />
-                <figcaption class="feature-carousel-title"></figcaption>
+
+                <div class="promotion-deck-info">
+                  <h3></h3>
+                  <p></p>
+                </div>
               </figure>
               <figure
-                class="feature-carousel-slide"
+                class="promotion-deck-card"
                 aria-roledescription="slide"
-                aria-label="2 of 2"
+                aria-label="2 of 4"
               >
                 <img
                   src="photos/offer english.jpg"
                   alt="BOLTS offer banner in English"
                   loading="eager"
                 />
-                <figcaption class="feature-carousel-title"></figcaption>
+                <div class="promotion-deck-info">
+                  <h3></h3>
+                  <p></p>
+                </div>
+              </figure>
+              <figure
+                class="promotion-deck-card"
+                aria-roledescription="slide"
+                aria-label="3 of 4"
+              >
+                <img
+                  src="photos/offer arabic.jpg"
+                  alt="BOLTS offer banner in Arabic"
+                  loading="eager"
+                />
+                <div class="promotion-deck-info">
+                  <h3></h3>
+                  <p></p>
+                </div>
+              </figure>
+              <figure
+                class="promotion-deck-card"
+                aria-roledescription="slide"
+                aria-label="4 of 4"
+              >
+                <img
+                  src="photos/offer english.jpg"
+                  alt="BOLTS offer banner in English"
+                  loading="eager"
+                />
+                <div class="promotion-deck-info">
+                  <h3></h3>
+                  <p></p>
+                </div>
               </figure>
             </div>
           </div>
-          <div
-            class="feature-carousel-thumbnails"
-            role="group"
-            aria-label="Choose an offer"
-          ></div>
+          <div class="promotion-deck-footer">
+            <div class="promotion-deck-count" aria-live="polite">
+              <strong class="promotion-deck-current">01</strong> /
+              <span class="promotion-deck-total">04</span>
+            </div>
+            <div
+              class="promotion-deck-dots"
+              role="tablist"
+              aria-label="Choose an offer"
+            ></div>
+          </div>
         </div>
       </section>
 

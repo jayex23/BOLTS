@@ -321,6 +321,117 @@ document.querySelectorAll(".feature-carousel").forEach((carousel) => {
   showSlide(0);
 });
 
+document.querySelectorAll(".promotion-deck-carousel").forEach((carousel) => {
+  const viewport = carousel.querySelector(".promotion-deck-viewport");
+  const cards = Array.from(
+    carousel.querySelectorAll(".promotion-deck-card"),
+  );
+  const dotsElement = carousel.querySelector(".promotion-deck-dots");
+  const currentElement = carousel.querySelector(".promotion-deck-current");
+  const totalElement = carousel.querySelector(".promotion-deck-total");
+  const gapRatio = 0.82;
+  let currentIndex = 0;
+  let touchStartX = null;
+
+  totalElement.textContent = String(cards.length).padStart(2, "0");
+
+  const dots = cards.map((card, index) => {
+    const info = card.querySelector(".promotion-deck-info");
+    const imageAlt = card.querySelector("img").alt;
+    const label = info.textContent.trim()
+      ? info.textContent.trim().replace(/\s+/g, " ")
+      : imageAlt;
+    const dot = document.createElement("button");
+
+    if (!info.textContent.trim()) info.hidden = true;
+    dot.className = "promotion-deck-dot";
+    dot.type = "button";
+    dot.setAttribute("role", "tab");
+    dot.setAttribute("aria-label", `Show ${label} (${index + 1} of ${cards.length})`);
+    dot.setAttribute("aria-selected", "false");
+    dot.tabIndex = -1;
+    dot.addEventListener("click", () => goTo(index));
+    dotsElement.append(dot);
+    return dot;
+  });
+
+  function render() {
+    const cardWidth = cards[0].offsetWidth || (viewport.clientHeight * 2) / 3;
+    const step = cardWidth * gapRatio;
+    const halfLength = cards.length / 2;
+
+    cards.forEach((card, index) => {
+      let offset = index - currentIndex;
+      if (offset > halfLength) offset -= cards.length;
+      if (offset < -halfLength) offset += cards.length;
+      const distance = Math.abs(offset);
+      const isActive = index === currentIndex;
+      const scale = isActive ? 1 : 0.78;
+      const opacity = distance > 1 ? 0 : isActive ? 1 : 0.45;
+
+      card.classList.toggle("is-active", isActive);
+      card.style.transform = `translateX(calc(-50% + ${
+        offset * step
+      }px)) scale(${scale})`;
+      card.style.opacity = opacity;
+      card.style.zIndex = String(10 - distance);
+      card.setAttribute("aria-label", `${index + 1} of ${cards.length}`);
+      card.setAttribute("aria-hidden", isActive ? "false" : "true");
+    });
+
+    dots.forEach((dot, index) => {
+      const isActive = index === currentIndex;
+      dot.classList.toggle("is-active", isActive);
+      dot.setAttribute("aria-selected", isActive ? "true" : "false");
+      dot.tabIndex = isActive ? 0 : -1;
+    });
+    currentElement.textContent = String(currentIndex + 1).padStart(2, "0");
+  }
+
+  function goTo(index) {
+    currentIndex = (index + cards.length) % cards.length;
+    render();
+  }
+
+  cards.forEach((card, index) => {
+    card.addEventListener("click", () => {
+      if (index !== currentIndex) goTo(index);
+    });
+  });
+
+  carousel.addEventListener("keydown", (event) => {
+    if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+    event.preventDefault();
+    const nextIndex = currentIndex + (event.key === "ArrowRight" ? 1 : -1);
+    goTo(nextIndex);
+    if (event.target.closest(".promotion-deck-dot")) {
+      dots[currentIndex].focus();
+    }
+  });
+  viewport.addEventListener(
+    "touchstart",
+    (event) => {
+      touchStartX = event.changedTouches[0].screenX;
+    },
+    { passive: true },
+  );
+  viewport.addEventListener(
+    "touchend",
+    (event) => {
+      if (touchStartX === null) return;
+      const distance = event.changedTouches[0].screenX - touchStartX;
+      touchStartX = null;
+      if (Math.abs(distance) > 50) {
+        goTo(currentIndex + (distance < 0 ? 1 : -1));
+      }
+    },
+    { passive: true },
+  );
+
+  window.addEventListener("resize", render);
+  render();
+});
+
 // Highlight the link of the section you are viewing
 const sections = document.querySelectorAll("main section[id], footer[id]");
 const navAnchors = links.querySelectorAll(":scope > li > a");

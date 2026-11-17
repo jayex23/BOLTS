@@ -1839,12 +1839,6 @@ footer#contact {
 #promotion > .container {
   padding: 0 20px;
 }
-.promotion-feature-heading {
-  margin-top: 24px;
-  color: #fffdf2;
-  text-align: center;
-}
-#promotion .feature-carousel--offers,
 #restaurant .feature-carousel--restaurant {
   max-width: 1000px;
   padding: 14px;
@@ -1854,17 +1848,159 @@ footer#contact {
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.38);
   outline: none;
 }
-#promotion .feature-carousel--offers {
-  width: calc(100% - 40px);
-  margin: 20px auto 30px;
-}
 #restaurant .feature-carousel--restaurant {
   width: 100%;
   margin: 30px auto 0;
 }
-#promotion .feature-carousel--offers:focus-visible,
 #restaurant .feature-carousel--restaurant:focus-visible {
   outline: 3px solid #facc15;
+  outline-offset: 3px;
+}
+.promotion-feature-heading {
+  margin-top: 24px;
+  color: #fffdf2;
+  text-align: center;
+}
+#promotion .promotion-deck-carousel {
+  width: calc(100% - 40px);
+  max-width: 1000px;
+  margin: 20px auto 30px;
+  outline: none;
+}
+#promotion .promotion-deck-carousel:focus-visible {
+  outline: 3px solid #facc15;
+  outline-offset: 3px;
+}
+.promotion-deck-viewport {
+  position: relative;
+  height: min(72svh, 620px);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 12%,
+    #000 88%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 12%,
+    #000 88%,
+    transparent
+  );
+}
+.promotion-deck-track {
+  position: absolute;
+  inset: 0;
+}
+.promotion-deck-card {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 100%;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  border: 1px solid rgba(250, 204, 21, 0.24);
+  border-radius: 18px;
+  background: #070a12;
+  box-shadow: 0 24px 50px -12px rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+  opacity: 0.45;
+  transform: translateX(-50%) scale(0.78);
+  transition:
+    transform 0.7s cubic-bezier(0.65, 0, 0.35, 1),
+    opacity 0.7s ease;
+}
+.promotion-deck-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.promotion-deck-card.is-active {
+  cursor: default;
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+.promotion-deck-info {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 60px 24px 22px;
+  transform: translateY(12px);
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.78));
+  color: #fff;
+  opacity: 0;
+  transition:
+    opacity 0.5s ease 0.2s,
+    transform 0.5s ease 0.2s;
+}
+.promotion-deck-card.is-active .promotion-deck-info {
+  transform: translateY(0);
+  opacity: 1;
+}
+.promotion-deck-info h3 {
+  margin: 0 0 4px;
+  color: #fff;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+.promotion-deck-info p {
+  margin: 0;
+  color: #fff;
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+.promotion-deck-footer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 28px;
+  padding: 0 8px;
+}
+.promotion-deck-count {
+  position: absolute;
+  left: 8px;
+  min-width: 70px;
+  color: #c9cbd2;
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+}
+.promotion-deck-count strong {
+  color: #fff;
+}
+.promotion-deck-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+.promotion-deck-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: #c9cbd2;
+  cursor: pointer;
+  opacity: 0.4;
+  transition:
+    width 0.4s ease,
+    opacity 0.3s,
+    background 0.3s;
+}
+.promotion-deck-dot.is-active {
+  width: 26px;
+  background: #facc15;
+  opacity: 1;
+}
+#promotion .promotion-deck-carousel button:focus-visible {
+  outline: 2px solid #facc15;
   outline-offset: 3px;
 }
 .feature-carousel-topbar {
@@ -1995,9 +2131,28 @@ footer#contact {
   object-fit: cover;
 }
 @media (max-width: 600px) {
-  #promotion .feature-carousel--offers {
+  #promotion .promotion-deck-carousel {
     width: calc(100% - 24px);
-    padding: 10px;
+  }
+  .promotion-deck-viewport {
+    height: 62svh;
+  }
+  .promotion-deck-info {
+    padding: 48px 16px 16px;
+  }
+  .promotion-deck-info h3 {
+    font-size: 1.2rem;
+  }
+  .promotion-deck-footer {
+    gap: 8px;
+    margin-top: 20px;
+    padding: 0;
+  }
+  .promotion-deck-count {
+    left: 0;
+  }
+  .promotion-deck-dots {
+    gap: 6px;
   }
   #restaurant .feature-carousel--restaurant {
     padding: 10px;
@@ -2013,6 +2168,11 @@ footer#contact {
   }
 }
 @media (prefers-reduced-motion: reduce) {
+  .promotion-deck-card,
+  .promotion-deck-info,
+  .promotion-deck-dot {
+    transition: none;
+  }
   .feature-carousel-slides {
     transition: none;
   }
