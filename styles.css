@@ -1079,11 +1079,11 @@ footer#contact {
   background:
     linear-gradient(
       90deg,
-      rgba(91, 39, 3, 0.92) 0%,
-      rgba(12, 10, 9, 0.8) 44%,
-      rgba(5, 6, 11, 0.42) 100%
+      rgba(91, 39, 3, 0.86) 0%,
+      rgba(12, 10, 9, 0.72) 44%,
+      rgba(5, 6, 11, 0.32) 100%
     ),
-    linear-gradient(0deg, rgba(5, 6, 11, 0.4), transparent 50%);
+    linear-gradient(0deg, rgba(5, 6, 11, 0.32), transparent 50%);
 }
 .hero-cover-bg img,
 .hero-cover-bg video {
