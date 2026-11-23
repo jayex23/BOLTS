@@ -104,16 +104,12 @@
     <main>
       <section class="hero hero-cover" id="home">
         <div class="hero-cover-bg" aria-hidden="true">
-          <video
-            autoplay
-            muted
-            loop
-            playsinline
-            preload="metadata"
-            poster="photos/DSC03157.jpg"
-          >
-            <source src="video/202611171309.mp4" type="video/mp4" />
-          </video>
+          <img
+            src="photos/DSC03157.jpg"
+            alt=""
+            loading="eager"
+            fetchpriority="high"
+          />
         </div>
         <div class="container">
           <div class="hero-cover-copy">
@@ -545,38 +541,7 @@
               <figure
                 class="promotion-deck-card"
                 aria-roledescription="slide"
-                aria-label="1 of 4"
-              >
-                <img
-                  src="photos/offer arabic.jpg"
-                  alt="BOLTS offer banner in Arabic"
-                  loading="eager"
-                />
-
-                <div class="promotion-deck-info">
-                  <h3></h3>
-                  <p></p>
-                </div>
-              </figure>
-              <figure
-                class="promotion-deck-card"
-                aria-roledescription="slide"
-                aria-label="2 of 4"
-              >
-                <img
-                  src="photos/offer english.jpg"
-                  alt="BOLTS offer banner in English"
-                  loading="eager"
-                />
-                <div class="promotion-deck-info">
-                  <h3></h3>
-                  <p></p>
-                </div>
-              </figure>
-              <figure
-                class="promotion-deck-card"
-                aria-roledescription="slide"
-                aria-label="3 of 4"
+                aria-label="1 of 2"
               >
                 <img
                   src="photos/offer arabic.jpg"
@@ -591,7 +556,7 @@
               <figure
                 class="promotion-deck-card"
                 aria-roledescription="slide"
-                aria-label="4 of 4"
+                aria-label="2 of 2"
               >
                 <img
                   src="photos/offer english.jpg"
@@ -608,7 +573,7 @@
           <div class="promotion-deck-footer">
             <div class="promotion-deck-count" aria-live="polite">
               <strong class="promotion-deck-current">01</strong> /
-              <span class="promotion-deck-total">04</span>
+              <span class="promotion-deck-total">02</span>
             </div>
             <div
               class="promotion-deck-dots"
